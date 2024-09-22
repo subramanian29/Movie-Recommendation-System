@@ -29,7 +29,7 @@ This is a [MERN stack](https://www.mongodb.com/mern-stack) project that combines
 - **Frontend**: React, CSS (Bootstrap)
 - **Backend**: Node.js, Express.js, Flask (for hosting the ML API)
 - **Database**: MongoDB, Mongoose (to minimise API calls to TMDB)
-- **Other Tools**: (e.g., Axios for API requests, pyMongo - to connect Flask with the database)
+- **Other Tools**: (e.g., Axios for API requests, pyMongo - to connect Flask with the database, MUI for Icons)
 
 ## Getting Started
 
