@@ -1,0 +1,41 @@
+.box{
+    margin-top: 9rem;
+    margin-bottom:5rem;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+.search-box{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: margin-top 0.2s ease-in-out;
+}
+
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.box-hidden {
+    height:0;
+    display: none;
+}
+
+.colored{
+    color:#FA824C ;
+}
+
+#randomButton{
+    border-color: #FA824C;
+    color:black
+
+}
+
+#randomButton:hover{
+    background-color: #FA824C;
+    color:white;
+
+}
+
+
