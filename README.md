@@ -45,7 +45,7 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/subramanian29/Movie-Recommendation-System.git
+   git clone https://github.com/subramanian29/cineMatch.git
    ```
 
 2. Navigate to the project directory:
