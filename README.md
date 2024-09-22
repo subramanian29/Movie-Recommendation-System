@@ -12,10 +12,8 @@ A web-app that recommends the user with top ten suggestions of films similar to 
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
-- [Folder Structure](#folder-structure)
 - [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Project Description
 
