@@ -1,7 +1,7 @@
 
 # cineMatch
 
-A web-app that recommends the user with top ten suggestions of films similar to what they have searched for. Additionally, if the user wants, they can get a random suggestion too!
+A website that recommends the user with top ten suggestions of films similar to what they have searched for. Additionally, if the user wants, they can get a random suggestion too!
 
 ## Table of Contents
 
