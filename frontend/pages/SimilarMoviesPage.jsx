@@ -17,12 +17,16 @@ export default function SimilarMoviesPage(){
 
     useEffect(()=>{ async function effect(){
         setIsLoading(()=>{return true})
-        const res= await fetch(`http://localhost:5000/${movieId}`)
+        const res= await fetch(`http://localhost:5000/${movieId}`,{method: 'GET',
+            credentials: 'include'
+          })
         const data=await res.json();
         setMovie(()=>{return {...data}})
                                     
 
-        const res2=await fetch(`http://localhost:5000/similar/${movieId}`)
+        const res2=await fetch(`http://localhost:5000/similar/${movieId}`,{method: 'GET',
+            credentials: 'include'
+          })
         const data2=await res2.json()
         setMovieList(()=>{return [...data2]})
         
@@ -37,7 +41,7 @@ export default function SimilarMoviesPage(){
             <div>
             
             <RecommendedMovieCard movie={movie} isMain={true}/>
-            {isLoading?(<LoadingCircle/>):(<RecommendedMovieGrid movies={movieList}/>)}
+            {isLoading?(<LoadingCircle/>):(<RecommendedMovieGrid movies={movieList} watchlistButton={true}/>)}
             </div>
 
     )

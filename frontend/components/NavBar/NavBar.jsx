@@ -1,13 +1,21 @@
-// Navbar.js
+
 import React from 'react';
-import './NavBar.css'
+import './NavBar.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+import DropDown from '../DropDown/DropDown';
 
 const Navbar = () => {
+  const {isLoggedIn, setIsLoggedIn}= useAuth();
+  
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/"><span className="logo">cineMa</span>tch</Link>
+        <Link className="navbar-brand" to="/">
+          <span className="logo">cineMa</span>tch
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,11 +33,33 @@ const Navbar = () => {
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link reloadDocument className="nav-link" to="/random">Random</Link>
+              <Link className="nav-link" to="/random">Random</Link>
             </li>
+          </ul>
+          <ul className="navbar-nav ms-auto"> 
+          {!isLoggedIn?(
+            <>
+            <li className="nav-item">
+              <Link className="nav-link" to="/register">Register</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Login</Link>
+            </li>
+            </>
+          ): (
+            <>
+              <li className="nav-item">
+                <DropDown className="me-5"/>
+
+            
+            </li>
+            </>
+
+          )}
           </ul>
         </div>
       </div>
+
     </nav>
   );
 };

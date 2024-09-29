@@ -51,7 +51,7 @@ function SearchInput({handleSubmit}) {
             <button className="input-group-text btn btn-primary" id="basic-addon2" type="submit"><SearchIcon/></button>
         </div>
     </form>
-    <button id="randomButton" onClick={()=>{navigate('/random')}} type="button" class="btn btn-outline-primary mx-5 mt-5 w-50 align-self-center box" >Or Give me a Random Movie</button>
+    <button id="randomButton" onClick={()=>{navigate('/random')}} type="button" className="btn btn-outline-primary mx-5 mt-5 w-50 align-self-center box" >Or Give me a Random Movie</button>
 
     </div>
     </div>

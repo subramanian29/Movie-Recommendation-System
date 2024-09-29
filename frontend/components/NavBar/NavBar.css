@@ -1,3 +1,14 @@
 .logo{
     color:#FA824C;
 }
+
+
+
+.profile-icon {
+    transition: opacity 0.3s ease; 
+  }
+  
+  .profile-icon:hover {
+    opacity: 0.5;
+  }
+  

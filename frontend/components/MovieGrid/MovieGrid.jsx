@@ -7,8 +7,8 @@ export default function MovieGrid({movies}){
             <div className="row">
             
                     {movies.map((movie)=>(
-                        <div className={`col-2 mb-5 `}>
-                        <MovieCard movie={movie} key={movie._id}/>
+                        <div className={`col-2 mb-5 ` } key={movie._id}>
+                        <MovieCard movie={movie}/>
                         </div>
                         
                     ))}

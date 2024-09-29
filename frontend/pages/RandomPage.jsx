@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function SimilarMoviesPage(){
+export default function RandomPage(){
 
     const[isLoading,setIsLoading] = useState(true)
 
     const [randomMovie,setRandomMovie] = useState({});
+    const [clickButton,setClickButton] = useState(false);
+    const [inWatchlist, setInWatchlist]= useState(false)
 
     const navigate=useNavigate()
 
@@ -20,7 +22,9 @@ export default function SimilarMoviesPage(){
         setIsLoading(()=>{return true})
         let data={};
         try{
-            const res= await fetch(`http://localhost:5000/random`)
+            const res= await fetch(`http://localhost:5000/random`, {method: 'GET',
+                credentials: 'include'
+              })
             data=await res.json();
         }
         catch(e){}
@@ -31,8 +35,50 @@ export default function SimilarMoviesPage(){
 
     }; effect();},[])
 
-
     const{posterUrl,title,overview,voteCount,voteAverage,_id}=randomMovie
+
+    useEffect(()=>{ async function gt(){
+
+        const response= await fetch("http://localhost:5000/inwatchlist",{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials:'include',
+            body:JSON.stringify({id:_id})
+        })
+        if(response){
+            const data= await response.json();
+            setInWatchlist(()=>data.success)
+        }
+
+    }; gt();},[clickButton])
+
+   
+
+    async function handleClick(_id) {
+        const response = await fetch("http://localhost:5000/watchlist", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: 'include',
+            body: JSON.stringify({ id: _id, remove: inWatchlist }), 
+        });
+        const data= await response.json();
+        console.log("hi",data)
+        if(data.success)
+        {
+            setClickButton(prev=>!prev)
+   
+        }
+        else{
+            navigate("/login")
+        }
+    }
+
+
+    
     if(isLoading){
         return <LoadingCircle/>
     }
@@ -55,6 +101,7 @@ export default function SimilarMoviesPage(){
                         <div className="mt-5">
                         <button type="button" onClick={()=>{window.location.reload()}} className="btn btn-outline-primary ml-0 mr-5 w-25 mb-0" >Get Another Movie</button>
                         <button type="button" onClick={()=>{return navigate(`/${_id}`)}} className="btn btn-outline-primary mx-5 w-25 mb-0" >View Similar Movies</button>
+                        <button type="button" onClick={()=>{handleClick(_id)}} className="btn btn-outline-primary mx-5 w-25 mb-0" >{!inWatchlist?"Add to Watchlist":"Remove From Watchlist"}</button>
                         </div>
 
 

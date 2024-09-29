@@ -18,7 +18,9 @@ function HomePage() {
     const url=`http://localhost:5000/?movie=${movieName}`
     let data=[]
     try{
-      const res=await fetch(url);
+      const res=await fetch(url,{method: 'GET',
+        credentials: 'include'
+      });
       data= await res.json();
       console.log("data",!data,data)
     }
@@ -35,7 +37,7 @@ function HomePage() {
     <SearchForm handleSubmit={handleSubmit} />
 
     {isLoading? (<LoadingCircle/>):
-     (movieData.length || !oneLoaded)?(<MovieGrid movies={movieData}/>):(<NoResultsFound/>)
+     (movieData.length || !oneLoaded)?(<MovieGrid movies={movieData}/>):(<NoResultsFound message={"No results found...:("}/>)
     }
     </>
   )
