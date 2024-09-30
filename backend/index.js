@@ -61,13 +61,65 @@ app.get("/random",catchAsync(async(req,res)=>{
 app.get("/similar/:id",catchAsync(async(req,res)=>{
     const fetchedData= await axios.get(`http://localhost:5001/${req.params.id}`)
     const results=fetchedData.data 
+    let stars=0
+    let user=undefined;
+    if(req.user)
+    {
+        user= await User.findById(req.user._id);
+        
+    }
     let arr=[];
     for (let result of results){
         const movie= await Movie.findById(result);
-        arr.push(movie)
+        if(req.user){
+            if(user.rating)
+            {
+                stars=await user.rating[result];
+                if(!stars) stars=0;
+            }
+
+        }
+   
+        const tmp= {rating:stars,...(movie.toObject())};
+        arr.push(tmp)
     }
     res.json(arr)
 
+}))
+
+app.post("/rating",catchAsync(async (req,res)=>{
+
+    if(req.user)
+    {
+        const {_id,stars} = req.body;
+        const user= await User.findById(req.user._id);
+        if(!user.rating){
+            user.rating={}
+        }
+        if(!stars){
+            const {[_id]:omit,...rest}= user.rating
+            user.rating={...rest}
+        }
+        else user.rating= {...user.rating,[_id]:stars};
+
+        console.log(user.rating)
+        
+        await user.save();
+        return res.json({success:true});
+
+    }
+    return res.json({success:false});
+}))
+
+app.get("/rating",catchAsync(async(req,res)=>{
+    if(req.user)
+    {
+        const user= await User.findById(req.user._id);
+        const data= user.rating;
+        if(!data) data={};
+        return res.json(data)
+    }
+    return res.json(false)
 }))
 
 
@@ -192,6 +244,17 @@ app.post("/inwatchlist",catchAsync(async(req,res)=>{
 app.get("/:id",catchAsync(async(req,res)=>{
     const id= req.params.id;
     let data= await Movie.findById(id);
+    let stars=0
+  
+    if(req.user){
+        const user= await User.findById(req.user._id)
+        if(user.rating){
+            console.log(user.rating)
+            stars=user.rating[id]
+            console.log(stars)
+        }
+        if(!stars) stars=0;
+    }
 
     if(!data || data.length==0){
         const url=`https://api.themoviedb.org/3/movie/${id}?language=en-US`;
@@ -208,7 +271,8 @@ app.get("/:id",catchAsync(async(req,res)=>{
 
         
     }
-    res.json(data);
+    const tmp={rating:stars,...(data.toObject())}
+    res.json(tmp);
 }))
 
 app.get("/",catchAsync(async(req,res,next)=>{

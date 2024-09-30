@@ -3,9 +3,12 @@ import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecommendedMovieCard.css';
+import UserRating from '../UserRating/UserRating';
 
 export default function RecommendedMovieCard({ movie,watchlistClick,isMain = false, watchlistButton = false }) {
-    const { title, posterUrl, overview, voteAverage, voteCount, _id } = movie;
+    
+    const { title, posterUrl, overview, voteAverage, voteCount, _id,rating } = movie;
+    
     const [hover, setHover] = useState(false);
 
     const[inWatchlist,setInWatchlist]=useState(false);
@@ -65,11 +68,12 @@ export default function RecommendedMovieCard({ movie,watchlistClick,isMain = fal
                                 <div>
                                     <h5 className="card-title">{title}</h5>
                                     <p className="card-text">{overview}</p>
-                                    {!isMain && (
-                                        <p className="card-text mb-0">
-                                            <small className="text-body-secondary">⭐{Math.round(voteAverage * 10) / 10} ({voteCount})</small>
-                                        </p>
-                                    )}
+                                   
+                                    <p className="card-text mb-0">
+                                        <small className="">⭐{Math.round(voteAverage * 10) / 10} ({voteCount})</small>
+                                    </p>
+                               
+                                    <UserRating movieID={_id} stars={rating}/>
                                 </div>
                                 {watchlistButton && (
                                     <div className="position-relative">

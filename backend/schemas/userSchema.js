@@ -12,6 +12,10 @@ const UserSchema= new Schema({
     watchlist:{
        type: [Number],
        default:[]
+    },
+    rating:{
+        type:Object,
+        default:{}
     }
 });
 

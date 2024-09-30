@@ -21,6 +21,7 @@ export default function SimilarMoviesPage(){
             credentials: 'include'
           })
         const data=await res.json();
+        
         setMovie(()=>{return {...data}})
                                     
 
@@ -40,11 +41,14 @@ export default function SimilarMoviesPage(){
     return(
             <div>
             
-            <RecommendedMovieCard movie={movie} isMain={true}/>
-            {isLoading?(<LoadingCircle/>):(<RecommendedMovieGrid movies={movieList} watchlistButton={true}/>)}
+            {isLoading?(<LoadingCircle/>):(
+              <>
+              <RecommendedMovieCard movie={movie} isMain={true}/>
+              <RecommendedMovieGrid movies={movieList} watchlistButton={true}/>
+              </>
+            )}
             </div>
-
-    )
+    );
 
 
 }

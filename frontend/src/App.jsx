@@ -14,6 +14,7 @@ import LoginPage from '../pages/LoginPage';
 import { useEffect } from 'react';
 import { useAuth } from '../components/AuthContext';
 import WatchListPage from '../pages/WatchListPage';
+import RatingsPage from '../pages/RatingsPage';
 
 function App() {
   const {setIsLoggedIn}= useAuth();
@@ -44,6 +45,7 @@ function App() {
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path="/watchlist" element={<WatchListPage/>}/>
+        <Route path="/ratings" element={<RatingsPage/>}/>
       </Routes>
     </Router>
   

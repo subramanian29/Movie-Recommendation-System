@@ -32,6 +32,7 @@ export default function DropDown() {
         <ul className="dropdown-menu dropdown-menu-start " aria-labelledby="dropdownMenuButton" style={{ marginLeft: '-90%' }}>
             <h6 className="dropdown-header">{isLoggedIn?(isLoggedIn):"none"}</h6>
             <li><button className="btn dropdown-item" onClick={()=>{navigate("/watchlist")}}>Watchlist</button></li>
+            <li><button className="btn dropdown-item" onClick={()=>{navigate("/ratings")}}>Your Ratings</button></li>
             <li><button id="logout" className="btn dropdown-item" onClick={handleClick} >Logout</button></li>
         </ul>
         </div>

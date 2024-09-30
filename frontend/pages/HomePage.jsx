@@ -22,7 +22,7 @@ function HomePage() {
         credentials: 'include'
       });
       data= await res.json();
-      console.log("data",!data,data)
+    
     }
     catch(e){}
     setMovieData(()=>{return [...data]})
