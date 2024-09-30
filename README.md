@@ -24,6 +24,7 @@ This is a [MERN stack](https://www.mongodb.com/mern-stack) project that combines
 - Search a movie and get suggestions- User can search for a movie by typing the title. Then they can click on it to get the suggestions
 - Get Random Suggestion: Users can get a random movie as suggestion by going to the designated page
 - Add and remove movies from your watchlist
+- Rate movies and view the movies you've rated
 ## Tech Stack
 
 - **Frontend**: React, CSS (Bootstrap)
